@@ -1,6 +1,6 @@
 .PHONY: deps test
 
-deps:
+dep:
 	pip install -r requirements.txt; \
 		pip install -r test_requirements.txt
 
@@ -15,7 +15,7 @@ test_verbose:
 
 lint:
 	flake8 hello_world test
-	
+
 docker_build:
 	docker build -t hello-world-printer .
 
@@ -24,3 +24,11 @@ docker_run: docker_build
 		 --name hello-world-printer-dev \
 		 -p 5000:5000 \
 		 -d hello-world-printer
+
+docker_start:
+	docker start hello-world-printer-dev
+	docker ps
+
+docker_stop:
+	docker stop hello-world-printer-dev
+	docker ps -a
